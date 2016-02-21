@@ -1,0 +1,11 @@
+{
+  "name": "indonesian_stemmerjs",
+  "version": "0.0.1",
+  "description": "Stem kata bahasa indonesia berdasarkan porter stemmer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ikhsan Alatsary",
+  "license": "MIT"
+}
