@@ -59,5 +59,5 @@ module.exports = function (expect, should) {
         });
       });
     });
-});
+  });
 }
