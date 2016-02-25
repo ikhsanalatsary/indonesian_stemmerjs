@@ -4,12 +4,15 @@
   "description": "Stem kata bahasa indonesia berdasarkan porter stemmer",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/stemmer_utility_test.js -w"
+    "test": "mocha test/index.test.js -w"
   },
   "author": "Ikhsan Alatsary",
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "lodash": "^4.5.1"
   }
 }
