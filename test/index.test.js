@@ -26,4 +26,36 @@ describe('Stemmer', function() {
 			Stemmer.totalSyllables('permainan').should.equal(4);
 		});
 	});
+
+	describe('remove particle', function(){
+		describe('should remove the particles at the end of the word', function() {
+			it("'kah'", function() {
+				Stemmer.removeParticle('manakah').should.equal('mana');
+			});
+
+			it("'lah'", function() {
+				Stemmer.removeParticle('kembalilah').should.equal('kembali');
+			});
+
+			it("'pun'", function() {
+				Stemmer.removeParticle('bagaimanapun').should.equal('bagaimana');
+			});
+		});
+		describe('should not remove the particles at the rest part of the word', function() {
+			it("'kah", function() {
+				Stemmer.removeParticle('kahak').should.equal('kahak');
+				Stemmer.removeParticle('pernikahan').should.equal('pernikahan');
+			});
+
+			it("'lah", function() {
+				Stemmer.removeParticle('lahiriah').should.equal('lahiriah');
+				Stemmer.removeParticle('kelahiran').should.equal('kelahiran');
+			});
+
+			it("'pun", function() {
+				Stemmer.removeParticle('punya').should.equal('punya');
+				Stemmer.removeParticle('kepunyaan').should.equal('kepunyaan');
+			});
+		});
+	});
 });
