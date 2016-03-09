@@ -28,34 +28,75 @@ describe('Stemmer', function() {
 	});
 
 	describe('remove particle', function(){
-		describe('should remove the particles at the end of the word', function() {
+		describe('should remove these particles at the end of the word', function() {
 			it("'kah'", function() {
-				Stemmer.removeParticle('manakah').should.equal('mana');
+				shouldTransform(Stemmer.removeParticle,'manakah', 'mana');
 			});
 
 			it("'lah'", function() {
-				Stemmer.removeParticle('kembalilah').should.equal('kembali');
+				shouldTransform(Stemmer.removeParticle,'kembalilah', 'kembali');
 			});
 
 			it("'pun'", function() {
-				Stemmer.removeParticle('bagaimanapun').should.equal('bagaimana');
+				shouldTransform(Stemmer.removeParticle, 'bagaimanapun', 'bagaimana');
 			});
 		});
-		describe('should not remove the particles at the rest part of the word', function() {
+		describe('should not remove these particles at the rest part of the word', function() {
 			it("'kah", function() {
-				Stemmer.removeParticle('kahak').should.equal('kahak');
-				Stemmer.removeParticle('pernikahan').should.equal('pernikahan');
+				shouldNotTransform(Stemmer.removeParticle, 'kahak');
+				shouldNotTransform(Stemmer.removeParticle, 'pernikahan');
 			});
 
 			it("'lah", function() {
-				Stemmer.removeParticle('lahiriah').should.equal('lahiriah');
-				Stemmer.removeParticle('kelahiran').should.equal('kelahiran');
+				shouldNotTransform(Stemmer.removeParticle, 'lahiriah');
+				shouldNotTransform(Stemmer.removeParticle, 'kelahiran');
 			});
 
 			it("'pun", function() {
-				Stemmer.removeParticle('punya').should.equal('punya');
-				Stemmer.removeParticle('kepunyaan').should.equal('kepunyaan');
+				shouldNotTransform(Stemmer.removeParticle, 'punya');
+				shouldNotTransform(Stemmer.removeParticle, 'kepunyaan');
+			});
+		});
+	});
+
+	describe('remove possesive pronoun', function(){
+		describe('should remove these possessive pronouns at the end of the word', function() {
+			it("'ku'", function() {
+				shouldTransform(Stemmer.removePossesive, 'mainanku', 'mainan');
+			});
+
+			it("'mu'", function() {
+				shouldTransform(Stemmer.removePossesive, 'gelasmu', 'gelas');
+			});
+
+			it("'nya'", function() {
+				shouldTransform(Stemmer.removePossesive, 'mobilnya', 'mobil');
+			});
+		});
+
+		describe('should not remove these possessive pronouns at the rest part of the word', function() {
+			it("'ku", function() {
+				shouldNotTransform(Stemmer.removePossesive, 'kumakan');
+				shouldNotTransform(Stemmer.removePossesive, 'kekurangan');
+			});
+
+			it("'mu", function() {
+				shouldNotTransform(Stemmer.removePossesive, 'murahan');
+				shouldNotTransform(Stemmer.removePossesive, 'kemurkaan');
+			});
+
+			it("'nya", function() {
+				shouldNotTransform(Stemmer.removePossesive, 'nyapu');
+				shouldNotTransform(Stemmer.removePossesive, 'menyambung');
 			});
 		});
 	});
 });
+
+function shouldTransform(methodName, word, transformedWord) {
+	methodName(word).should.equal(transformedWord);
+}
+
+function shouldNotTransform(methodName, word) {
+	methodName(word).should.equal(word);
+}
