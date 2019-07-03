@@ -4,7 +4,9 @@
   "description": "Stem kata bahasa indonesia berdasarkan porter stemmer",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/index.test.js -w"
+    "test": "mocha test/index.test.js -w",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Ikhsan Alatsary",
   "license": "MIT",
@@ -13,6 +15,8 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
-    "lodash": "^4.5.1"
-  }
+    "lodash": "^4.5.1",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
